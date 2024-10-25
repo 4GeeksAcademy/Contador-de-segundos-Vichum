@@ -6,8 +6,40 @@ import ReactDOM from "react-dom/client";
 import "../styles/index.css";
 
 //import your own components
-import Home from "./component/home.jsx";
+import SimpleCounter from "./component/SimpleCounter.jsx";
 
-//render your react application
-ReactDOM.createRoot(document.getElementById('app')).render(<Home/>);
+let segundos = 0
+let decenasSegundos = 0
+let centenasSegundos = 0
+let milesimasSegundos = 0
 
+setInterval(() => {
+    segundos++;
+    if (segundos > 9) {
+        decenasSegundos += 1
+        segundos = 0
+    }
+
+if (decenasSegundos > 9) {
+    centenasSegundos += 1
+    decenasSegundos = 0
+    segundos = 0
+}
+
+if (centenasSegundos > 9) {
+    milesimasSegundos += 1
+    centenasSegundos = 0
+    decenasSegundos = 0
+    segundos = 0
+}
+
+if (milesimasSegundos > 9) {
+    milesimasSegundos = 0
+    centenasSegundos = 0
+    decenasSegundos = 0
+    segundos = 0
+}
+
+    ReactDOM.createRoot(document.getElementById('app')).render(
+    <SimpleCounter segundos={segundos} decenasSegundos={decenasSegundos} centenasSegundos={centenasSegundos} milesimasSegundos={milesimasSegundos}/>);
+}, 1000);
